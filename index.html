@@ -1,5 +1,145 @@
-<html>
-  <body>
-    Hello World
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Iframe</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #333;
+            z-index: 10;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        button {
+            /* position: absolute; */
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            margin: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 20px;
+            }
+            button {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            .popup {
+                padding: 15px;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: right;">Choudhary Tailors | Sun India Shawroom</h1>
+    
+
+    <iframe src="https://maps.google.com/maps?q=Sun%20India%20Showroom%20Pur%20Road%20Bhilwara&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed" allowfullscreen="" loading="lazy"></iframe>
+    
+    <button style="position: absolute;" id="openMap">Open in Google Maps</button>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h2>Open Location in Google Maps?</h2>
+        <p>Would you like to open this location in Google Maps or continue browsing here?</p>
+        <div>
+            <button id="yes">Open Maps</button>
+        </div>
+        <div>
+            <button id="no">Continue Browsing</button>
+        </div>
+    </div>
+
+    <script>
+        const overlay = document.getElementById('overlay');
+        const popup = document.getElementById('popup');
+        const openMapButton = document.getElementById('openMap');
+        const yesButton = document.getElementById('yes');
+        const noButton = document.getElementById('no');
+
+        // Show the popup after 1 second
+        setTimeout(() => {
+            overlay.style.display = 'block';
+            popup.style.display = 'block';
+        }, 1000);
+
+        yesButton.addEventListener('click', function() {
+            window.open('https://maps.google.com/maps?q=Sun%20India%20Showroom%20Pur%20Road%20Bhilwara', '_blank');
+            overlay.style.display = 'none';
+            popup.style.display = 'none';
+        });
+
+        noButton.addEventListener('click', function() {
+            overlay.style.display = 'none';
+            popup.style.display = 'none';
+        });
+
+        openMapButton.addEventListener('click', function() {
+            overlay.style.display = 'block';
+            popup.style.display = 'block';
+            noButton.style.display = 'none';
+        });
+    </script>
+
+</body>
 </html>
